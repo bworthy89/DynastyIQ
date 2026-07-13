@@ -27,12 +27,13 @@ coaching_staff_points = ask_for_points("Allocate to Coaching Staff: ")
 facilities_points = ask_for_points("Allocate to Facilities: ")
 recruiting_nil_points = ask_for_points("Allocate to Recruiting NIL: ")
 roster_nil_points = ask_for_points("Allocate to Roster NIL: ")
-allocations = [
-    ("Coaching Staff", coaching_staff_points),
-    ("Facilities", facilities_points),
-    ("Recruiting NIL", recruiting_nil_points),
-    ("Roster NIL", roster_nil_points),
-]
+allocations = {
+    "Coaching Staff": coaching_staff_points,
+    "Facilities": facilities_points,
+    "Recruiting NIL": recruiting_nil_points,
+    "Roster NIL": roster_nil_points,
+}
+
 total_allocated = (
     coaching_staff_points
     + facilities_points
@@ -51,6 +52,6 @@ else:
     print(f"You have {remaining_points} Dynasty Points remaining.")
 
 print("\nAllocation percentages:")
-for category_name, category_points in allocations:
+for category_name, category_points in allocations.items():
     percentage = calculate_percentage(category_points, available_points)
     print(f"{category_name}: {percentage:.1f}%")
