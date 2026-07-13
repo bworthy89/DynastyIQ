@@ -7,7 +7,11 @@ def ask_for_points(prompt):
     while True:
         try:
             points = int(input(prompt))
-            return points
+
+            if points < 0:
+                print("Please enter zero or a positive whole number.")
+            else:
+                return points
         except ValueError:
             print("Please enter a whole number.")
 
