@@ -15,6 +15,12 @@ def ask_for_points(prompt):
         except ValueError:
             print("Please enter a whole number.")
 
+def calculate_percentage(category_points, available_points):
+    if available_points == 0:
+        return 0.0
+
+    return category_points / available_points * 100
+
 show_title()
 available_points = ask_for_points("Enter available Dynasty Points: ")
 coaching_staff_points = ask_for_points("Allocate to Coaching Staff: ")
@@ -28,6 +34,18 @@ total_allocated = (
     + roster_nil_points
 )
 remaining_points = available_points - total_allocated
+coaching_staff_percentage = calculate_percentage(
+    coaching_staff_points, available_points
+)
+facilities_percentage = calculate_percentage(
+    facilities_points, available_points
+)
+recruiting_nil_percentage = calculate_percentage(
+    recruiting_nil_points, available_points
+)
+roster_nil_percentage = calculate_percentage(
+    roster_nil_points, available_points
+)
 
 print(f"Total allocated: {total_allocated} Dynasty Points")
 if total_allocated > available_points:
@@ -37,3 +55,9 @@ elif total_allocated == available_points:
     print(f"Your Dynasty Points are fully allocated.")
 else:
     print(f"You have {remaining_points} Dynasty Points remaining.")
+
+print("\nAllocation percentages:")
+print(f"Coaching Staff: {coaching_staff_percentage:.1f}%")
+print(f"Facilities: {facilities_percentage:.1f}%")
+print(f"Recruiting NIL: {recruiting_nil_percentage:.1f}%")
+print(f"Roster NIL: {roster_nil_percentage:.1f}%")
