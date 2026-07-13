@@ -27,6 +27,12 @@ coaching_staff_points = ask_for_points("Allocate to Coaching Staff: ")
 facilities_points = ask_for_points("Allocate to Facilities: ")
 recruiting_nil_points = ask_for_points("Allocate to Recruiting NIL: ")
 roster_nil_points = ask_for_points("Allocate to Roster NIL: ")
+allocations = [
+    ("Coaching Staff", coaching_staff_points),
+    ("Facilities", facilities_points),
+    ("Recruiting NIL", recruiting_nil_points),
+    ("Roster NIL", roster_nil_points),
+]
 total_allocated = (
     coaching_staff_points
     + facilities_points
@@ -34,18 +40,6 @@ total_allocated = (
     + roster_nil_points
 )
 remaining_points = available_points - total_allocated
-coaching_staff_percentage = calculate_percentage(
-    coaching_staff_points, available_points
-)
-facilities_percentage = calculate_percentage(
-    facilities_points, available_points
-)
-recruiting_nil_percentage = calculate_percentage(
-    recruiting_nil_points, available_points
-)
-roster_nil_percentage = calculate_percentage(
-    roster_nil_points, available_points
-)
 
 print(f"Total allocated: {total_allocated} Dynasty Points")
 if total_allocated > available_points:
@@ -57,7 +51,6 @@ else:
     print(f"You have {remaining_points} Dynasty Points remaining.")
 
 print("\nAllocation percentages:")
-print(f"Coaching Staff: {coaching_staff_percentage:.1f}%")
-print(f"Facilities: {facilities_percentage:.1f}%")
-print(f"Recruiting NIL: {recruiting_nil_percentage:.1f}%")
-print(f"Roster NIL: {roster_nil_percentage:.1f}%")
+for category_name, category_points in allocations:
+    percentage = calculate_percentage(category_points, available_points)
+    print(f"{category_name}: {percentage:.1f}%")
